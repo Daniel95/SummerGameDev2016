@@ -4,74 +4,65 @@ using System.Collections;
 public class TouchCameraControl : MonoBehaviour
 {
     [SerializeField]
-    private float minFieldOfView = 0.1f;
+    private float minDistance = 3.0f;
     [SerializeField]
-    private float maxFieldOfView = 179.9f;
+    private float maxDistance = 10.0f;
     [SerializeField]
     private Camera _camera;
     [SerializeField]
     private GameObject ball;
 
+    public float turnSpeed = 10.0f;
     public float perspectiveZoomSpeed = 0.5f;
     public float speed = 0.1f;
-
-    int nbTouches = Input.touchCount;
-
-
+    public float distance = 5.0f;
 
     void Update()
     {
         // If there are two touches on the device...
-        //if (Input.touchCount >= 2)
-        //{
-        //    print("multitouch");
-        //    // Store both touches.
-        //    Touch touchZero = Input.GetTouch(0);
-        //    Touch touchOne = Input.GetTouch(1);
+        if (Input.touchCount == 2)
+        {
+            // Store both touches.
+            Touch touchZero = Input.GetTouch(0);
+            Touch touchOne = Input.GetTouch(1);
 
-        //    // Find the position in the previous frame of each touch.
-        //    Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
-        //    Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
+            // Find the position in the previous frame of each touch.
+            Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
+            Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
 
-        //    // Find the magnitude of the vector (the distance) between the touches in each frame.
-        //    float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
-        //    float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
+            // Find the magnitude of the vector (the distance) between the touches in each frame.
+            float prevTouchDeltaMag = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            float touchDeltaMag = (touchZero.position - touchOne.position).magnitude;
 
-        //    // Find the difference in the distances between each frame.
-        //    float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+            // Find the difference in the distances between each frame.
+            float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
 
-        //    // Otherwise change the field of view based on the change in distance between the touches.
-        //    _camera.fieldOfView += deltaMagnitudeDiff * perspectiveZoomSpeed;
-
-        //    // Clamp the field of view to make sure it's between 0 and 180.
-        //    _camera.fieldOfView = Mathf.Clamp(_camera.fieldOfView, minFieldOfView, maxFieldOfView);
-        //}
-        //else
-        //{
-            //single touch
-            if (Input.GetTouch(0).phase == TouchPhase.Moved && Input.touchCount <= 1)
+            // Otherwise change the field of view based on the change in distance between the touches.
+            distance += deltaMagnitudeDiff * perspectiveZoomSpeed;
+        }
+        //single touch
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        {
+            // Get movement of the finger since last frame
+            Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
+            transform.RotateAround(ball.transform.position, Vector3.down, ((Time.deltaTime * touchDeltaPosition.x) * turnSpeed));
+            transform.RotateAround(ball.transform.position, Vector3.left, ((Time.deltaTime * touchDeltaPosition.y) * turnSpeed));
+        }
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            Touch touch = Input.GetTouch(0);
+            Ray screenRay = Camera.main.ScreenPointToRay(touch.position);
+            RaycastHit hit;
+            if (Physics.Raycast(screenRay, out hit))
             {
-                // Get movement of the finger since last frame
-                Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-                print("single touch + movement");
-                // Move object across XY plane
-               // transform.Translate(-touchDeltaPosition.x * speed, 0, 0);
-                transform.RotateAround(ball.transform.position, Vector3.up, touchDeltaPosition.x);
+              
             }
-        //    if (Input.GetTouch(0).phase == TouchPhase.Began && Input.touchCount <= 1)
-        //    {
-        //        Touch touch = Input.GetTouch(0);
+        }
+        // Clamp the field of view to make sure it's between 30 and 90.
+        distance = Mathf.Clamp(distance, minDistance, maxDistance);
 
-        //        Ray screenRay = Camera.main.ScreenPointToRay(touch.position);
-
-        //        RaycastHit hit;
-        //        if (Physics.Raycast(screenRay, out hit))
-        //        {
-        //            print("single touch + tap");
-        //            //handleTap(hit.collider.gameObject);
-        //        }
-        //    }
-
-        //}
+        Vector3 offset = (transform.position - ball.transform.position).normalized * distance;
+        transform.position = Vector3.Lerp(transform.position, ball.transform.position + offset, Time.deltaTime);
+        transform.LookAt(ball.transform);
     }
 }
