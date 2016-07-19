@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 8d80a06b5d7cca4449423bd73ec8e1d2
-timeCreated: 1468918715
+guid: a9c491f3f6cf42e40b307044679a2ee1
+timeCreated: 1468923002
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Line001
+    4300000: CornerNoPostWall
   materials:
     importMaterials: 1
     materialName: 0
