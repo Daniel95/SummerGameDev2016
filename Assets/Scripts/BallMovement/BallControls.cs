@@ -3,9 +3,6 @@ using System.Collections;
 
 public class BallControls : MonoBehaviour {
 
-    //[SerializeField]
-    //private string inputName = "space";
-
     [SerializeField]
     private GetSliderValue strengthSlider;
 
@@ -21,7 +18,6 @@ public class BallControls : MonoBehaviour {
 
     private void Awake() {
         ballVelocity = GetComponent<BallVelocity>();
-        //StartCoroutine(AwaitInput());
     }
 
     private void OnEnable() {
@@ -34,7 +30,6 @@ public class BallControls : MonoBehaviour {
 
     private void StartAwaitInput() {
         canShoot = true;
-        //StartCoroutine(AwaitInput());
     }
 
     public void Shoot() {
@@ -45,14 +40,4 @@ public class BallControls : MonoBehaviour {
             canShoot = false;
         }
     }
-
-    /*
-    IEnumerator AwaitInput() {
-        while (!Input.GetKeyDown(inputName)) {
-            yield return new WaitForFixedUpdate();
-        }
-
-        ballVelocity.ShootFromPosition(strengthSlider.Slider.value, heightSlider.Slider.value, camera.transform.position);
-        ballVelocity.StartCheckVelocity();
-    }*/
 }
