@@ -12,6 +12,9 @@ public class BallControls : MonoBehaviour {
     [SerializeField]
     private GetSliderValue heightSlider;
 
+    [SerializeField]
+    private GameObject camera;
+
     private BallVelocity ballVelocity;
 
     private void Awake() {
@@ -36,7 +39,7 @@ public class BallControls : MonoBehaviour {
             yield return new WaitForFixedUpdate();
         }
 
-        ballVelocity.AddVelocity(new Vector3(strengthSlider.Slider.value, heightSlider.Slider.value, 0), Vector3.zero);
+        ballVelocity.ShootTowards(strengthSlider.Slider.value, heightSlider.Slider.value, new Vector3(800, 990));
         ballVelocity.StartCheckVelocity();
     }
 }

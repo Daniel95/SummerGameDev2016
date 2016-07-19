@@ -19,9 +19,13 @@ public class BallVelocity : MonoBehaviour {
     /// add velocity to the target object.
     /// </summary>
     /// <param name="_velocity"></param>
-    public void AddVelocity(Vector3 _velocity,  Vector3 _direction)
+    public void ShootTowards(float _distance, float _height, Vector3 _direction)
     {
-        rb.velocity += _velocity;
+        float totalVector = _direction.x + _direction.y;
+        float xDir = (_direction.x / totalVector);
+        float yDir = (_direction.y / totalVector);
+
+        rb.velocity += new Vector3(_distance * xDir, _height, _distance * yDir);
     }
 
     /// <summary>
