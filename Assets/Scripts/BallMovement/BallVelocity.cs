@@ -19,13 +19,23 @@ public class BallVelocity : MonoBehaviour {
     /// add velocity to the target object.
     /// </summary>
     /// <param name="_velocity"></param>
-    public void ShootTowards(float _distance, float _height, Vector3 _direction)
+    public void ShootFromPosition(float _distance, float _height, Vector3 _shootPosition)
     {
-        float totalVector = _direction.x + _direction.y;
-        float xDir = (_direction.x / totalVector);
-        float yDir = (_direction.y / totalVector);
+        Vector3 vectorToShooter = transform.position - _shootPosition;
 
-        rb.velocity += new Vector3(_distance * xDir, _height, _distance * yDir);
+        Vector3 AbsoluteVectorToShooter = new Vector3(Mathf.Abs(_shootPosition.x - transform.position.x), Mathf.Abs(_shootPosition.y - transform.position.y), Math.Abs(_shootPosition.z - transform.position.z));
+
+        float totalVector = AbsoluteVectorToShooter.x + AbsoluteVectorToShooter.z;
+
+        float xDir = (AbsoluteVectorToShooter.x / totalVector);
+        if (vectorToShooter.x < 0)
+            xDir *= -1;
+
+        float zDir = (AbsoluteVectorToShooter.z / totalVector);
+        if (vectorToShooter.z < 0)
+            zDir *= -1;
+
+        rb.velocity += new Vector3(_distance * xDir, _height, _distance *  zDir);
     }
 
     /// <summary>

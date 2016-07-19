@@ -39,7 +39,7 @@ public class BallControls : MonoBehaviour {
             yield return new WaitForFixedUpdate();
         }
 
-        ballVelocity.ShootTowards(strengthSlider.Slider.value, heightSlider.Slider.value, new Vector3(800, 990));
+        ballVelocity.ShootFromPosition(strengthSlider.Slider.value, heightSlider.Slider.value, camera.transform.position);
         ballVelocity.StartCheckVelocity();
     }
 }
