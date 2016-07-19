@@ -12,11 +12,16 @@ public class BallControls : MonoBehaviour {
     [SerializeField]
     private GetSliderValue heightSlider;
 
+    [SerializeField]
+    private GameObject camera;
+
     private BallVelocity ballVelocity;
+
+    private bool canShoot = true;
 
     private void Awake() {
         ballVelocity = GetComponent<BallVelocity>();
-        StartCoroutine(AwaitInput());
+        //StartCoroutine(AwaitInput());
     }
 
     private void OnEnable() {
@@ -28,15 +33,28 @@ public class BallControls : MonoBehaviour {
     }
 
     private void StartAwaitInput() {
-        StartCoroutine(AwaitInput());
+        canShoot = true;
+        //StartCoroutine(AwaitInput());
     }
 
+    public void Shoot() {
+        if (canShoot)
+        {
+            ballVelocity.ShootFromPosition(strengthSlider.Slider.value, heightSlider.Slider.value, camera.transform.position);
+            ballVelocity.StartCheckVelocity();
+            canShoot = false;
+        }
+    }
+
+    /*
     IEnumerator AwaitInput() {
+
+
         while (!Input.GetKeyDown(inputName)) {
             yield return new WaitForFixedUpdate();
         }
 
-        ballVelocity.AddVelocity(new Vector3(strengthSlider.Slider.value, heightSlider.Slider.value, 0), Vector3.zero);
+        ballVelocity.ShootFromPosition(strengthSlider.Slider.value, heightSlider.Slider.value, camera.transform.position);
         ballVelocity.StartCheckVelocity();
-    }
+    }*/
 }
