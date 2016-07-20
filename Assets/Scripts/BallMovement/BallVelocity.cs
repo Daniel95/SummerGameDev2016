@@ -2,13 +2,10 @@
 using System.Collections;
 using System;
 
-public class BallVelocity : MonoBehaviour, IVelocity {
+public class BallVelocity : MonoBehaviour, IBallVelocity {
 
     [SerializeField]
     private float minVelocityValue = 0.5f;
-
-    [SerializeField]
-    private float effectStrengthMultiplier = 1.5f;
 
     [SerializeField]
     private float effectMultiplierStart = 0.25f;
@@ -32,7 +29,7 @@ public class BallVelocity : MonoBehaviour, IVelocity {
     {
         Vector3 angle = getAngle(_shootPosition);
 
-        rb.velocity += new Vector3(_strength * angle.x, _height, _height * angle.z);
+        rb.velocity += new Vector3(_strength * angle.x, _height, _strength * angle.z);
     }
 
     /// <summary>
