@@ -21,7 +21,6 @@ public class BallControls : MonoBehaviour {
 
     private void Awake() {
         ballVelocity = GetComponent<BallVelocity>();
-        //StartCoroutine(AwaitInput());
     }
 
     private void OnEnable() {
@@ -34,9 +33,11 @@ public class BallControls : MonoBehaviour {
 
     private void StartAwaitInput() {
         canShoot = true;
-        //StartCoroutine(AwaitInput());
     }
 
+    /// <summary>
+    /// activates the required functions to shoot the ball, and checks if we can currently shoot
+    /// </summary>
     public void Shoot() {
         if (canShoot) {
             ballVelocity.ShootFromPosition(strengthSlider.Slider.value, heightSlider.Slider.value, camera.transform.position);
@@ -45,14 +46,4 @@ public class BallControls : MonoBehaviour {
             canShoot = false;
         }
     }
-
-    /*
-    IEnumerator AwaitInput() {
-        while (!Input.GetKeyDown(inputName)) {
-            yield return new WaitForFixedUpdate();
-        }
-
-        ballVelocity.ShootFromPosition(strengthSlider.Slider.value, heightSlider.Slider.value, camera.transform.position);
-        ballVelocity.StartCheckVelocity();
-    }*/
 }
