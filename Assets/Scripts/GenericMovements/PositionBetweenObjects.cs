@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PositionBetweenObjects : MonoBehaviour {
 
     [SerializeField]
-    private float vectorDistaneMultiplier = 0.8f;
+    private float vectorDistaneMultiplier = 0.5f;
 
     [SerializeField]
     private GameObject object1;
