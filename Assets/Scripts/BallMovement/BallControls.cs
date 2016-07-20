@@ -32,6 +32,9 @@ public class BallControls : MonoBehaviour {
         canShoot = true;
     }
 
+    /// <summary>
+    /// activates the required functions to shoot the ball, and checks if we can currently shoot
+    /// </summary>
     public void Shoot() {
         if (canShoot) {
             ballVelocity.ShootFromPosition(strengthSlider.Slider.value, heightSlider.Slider.value, camera.transform.position);
