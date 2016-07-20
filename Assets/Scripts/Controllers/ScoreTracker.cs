@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
-public class ScoreTracker : MonoBehaviour {
+public class ScoreTracker : MonoBehaviour, IScoreTracker
+{
 
     [SerializeField]
     private Text hitsTextField;
@@ -14,14 +14,7 @@ public class ScoreTracker : MonoBehaviour {
     [SerializeField]
     private Sprite unitedCoinsEmpty;
 
-    private int shotCount;
-
-    void Start()
-    {
-        //set the default image
-        //unitedCoinsEmpty = 
-        shotCount = 0;
-    }
+    private int shotCount = 0;
 
     public void UnitedCoinCollected()
     {
