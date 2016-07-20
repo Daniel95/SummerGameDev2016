@@ -5,16 +5,16 @@ using System;
 public class BallVelocity : MonoBehaviour {
 
     [SerializeField]
-    private float minVelocityValue = 0.1f;
+    private float minVelocityValue = 0.5f;
 
     [SerializeField]
-    private float effectStrengthMultiplier = 0.3f;
+    private float effectStrengthMultiplier = 1.5f;
 
     [SerializeField]
-    private float effectMultiplierStart = 5f;
+    private float effectMultiplierStart = 0.25f;
 
     [SerializeField]
-    private float effectMultiplierOverTime = 1.5f;
+    private float effectMultiplierOverTime = 0.95f;
 
     public Action layStill;
 
