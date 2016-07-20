@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class UnitedCoinTrigger : MonoBehaviour {
 
-    private ScoreTracker scoreTracker;
 
     public void Interact()
     {
@@ -11,14 +11,16 @@ public class UnitedCoinTrigger : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        scoreTracker = GameObject.FindGameObjectWithTag(Tags.GAMECONTROLLER.ToString()).GetComponent<ScoreTracker>();
 	}
 
     private void OnTriggerEnter(Collider collider)
     {
         if(collider.CompareTag(Tags.BALL.ToString()))
         {
-            scoreTracker.UnitedCoinCollected();
+            ExecuteEvents.Execute<IScoreTracker>(collider.gameObject, null, (x, y) =>
+            {
+                x.UnitedCoinCollected();
+            });
             Destroy(this.gameObject);
         }
     }

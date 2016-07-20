@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class BallVelocity : MonoBehaviour, IVelocity {
+public class BallVelocity : MonoBehaviour, IBallVelocity {
 
     [SerializeField]
     private float minVelocityValue = 0.5f;
