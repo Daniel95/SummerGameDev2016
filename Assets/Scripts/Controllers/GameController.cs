@@ -6,34 +6,42 @@ public class GameController : MonoBehaviour {
 
     [SerializeField]
     private GameObject pauseMenu;
-    [SerializeField]
-    private GameObject pauseButton;
-    [SerializeField]
-    private GameObject restartButton;
-    [SerializeField]
-    private GameObject audioButton;
-    [SerializeField]
-    private GameObject pauseMenuRestartButton;
-    [SerializeField]
-    private GameObject pauseMenuResumeButton;
-    [SerializeField]
-    private GameObject pauseMenuMainMenuButton;
+    //[SerializeField]
+    //private GameObject pauseButton;
+    //[SerializeField]
+    //private GameObject restartButton;
+    //[SerializeField]
+    //private GameObject audioButton;
+    //[SerializeField]
+    //private GameObject pauseMenuRestartButton;
+    //[SerializeField]
+    //private GameObject pauseMenuResumeButton;
+    //[SerializeField]
+    //private GameObject pauseMenuMainMenuButton;
 
     // Use this for initialization
     void Start () {
-
-        pauseMenu.SetActive(false);
+        if (pauseMenu != null)
+        {
+            pauseMenu.SetActive(false);
+        }
 	}
 
     public void Pause()
     {
-        Time.timeScale = 0;
-        pauseMenu.SetActive(true);
+        if (pauseMenu != null)
+        {
+            Time.timeScale = 0;
+            pauseMenu.SetActive(true);
+        }
     }
     public void Resume()
     {
-        Time.timeScale = 1;
-        pauseMenu.SetActive(false);
+        if (pauseMenu != null)
+        {
+            Time.timeScale = 1;
+            pauseMenu.SetActive(false);
+        }
     }
 
     public void Restart()
@@ -43,11 +51,12 @@ public class GameController : MonoBehaviour {
         Time.timeScale = 1;
     }
 
-    public void MainMenu()
+    public void ChangeScene(string nameScene)
     {
         //destroy all objects in current screen.
         DontDestroyOnLoad(this);
         //show mainmenu
-        SceneManager.LoadScene("Default");
+        SceneManager.LoadScene(nameScene);
+        Time.timeScale = 1;
     }
 }
