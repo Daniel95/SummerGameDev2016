@@ -3,9 +3,6 @@ using System.Collections;
 
 public class BallControls : MonoBehaviour {
 
-    //[SerializeField]
-    //private string inputName = "space";
-
     [SerializeField]
     private GetSliderValue strengthSlider;
 
