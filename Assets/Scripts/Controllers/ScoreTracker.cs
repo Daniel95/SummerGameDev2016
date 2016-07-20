@@ -5,18 +5,32 @@ using UnityEngine.UI;
 public class ScoreTracker : MonoBehaviour {
 
     [SerializeField]
-    private Text Text;
+    private Text hitsTextField;
+    [SerializeField]
+    private Image unitedCoinsImage;
 
-    private int shotCount = 0;
+    [SerializeField]
+    private Sprite unitedCoinCompleted;
+    [SerializeField]
+    private Sprite unitedCoinsEmpty;
+
+    private int shotCount;
+
+    void Start()
+    {
+        //set the default image
+        //unitedCoinsEmpty = 
+        shotCount = 0;
+    }
 
     public void UnitedCoinCollected()
     {
-        Text.text = "POINTS";
+        unitedCoinsImage.sprite = unitedCoinCompleted;
     }
 
     public void IncreaseShotCount()
     {
         shotCount++;
-        Text.text = shotCount.ToString();
+        hitsTextField.text = shotCount.ToString();
     }
 }

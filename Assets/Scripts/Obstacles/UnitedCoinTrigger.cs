@@ -2,18 +2,17 @@
 
 public class UnitedCoinTrigger : MonoBehaviour, IObstaclesBehaviour {
 
-    private ScoreTracker scoreCalc;
+    private ScoreTracker scoreTracker;
 
     public void Interact()
     {
-        scoreCalc.UnitedCoinCollected();
-        Debug.Log("Hit Test");
-        //Destroy(this);
+        scoreTracker.UnitedCoinCollected();
+        Destroy(this.gameObject);
     }
 
     // Use this for initialization
     void Start () {
-        scoreCalc = GameObject.FindGameObjectWithTag(Tags.GAMECONTROLLER.ToString()).GetComponent<ScoreTracker>();
+        scoreTracker = GameObject.FindGameObjectWithTag(Tags.GAMECONTROLLER.ToString()).GetComponent<ScoreTracker>();
 	}
 
     private void OnTriggerEnter(Collider collider)
