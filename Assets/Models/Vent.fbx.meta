@@ -6,9 +6,17 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Bone003
+    100004: Bone004
+    100006: Vent
     400000: //RootNode
+    400002: Bone003
+    400004: Bone004
+    400006: Vent
     2300000: //RootNode
+    2300002: Vent
     3300000: //RootNode
+    3300002: Vent
     4300000: Vent
   materials:
     importMaterials: 1
