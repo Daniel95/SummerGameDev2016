@@ -7,7 +7,7 @@ public class BallControls : MonoBehaviour {
     private GetSliderValue strengthSlider;
 
     [SerializeField]
-    private GetSliderValue heightSlider;
+    private AimPosition aimPosition;
 
     [SerializeField]
     private GameObject camera;
@@ -37,7 +37,8 @@ public class BallControls : MonoBehaviour {
     /// </summary>
     public void Shoot() {
         if (canShoot) {
-            ballVelocity.ShootFromPosition(strengthSlider.Slider.value, heightSlider.Slider.value, camera.transform.position);
+            ballVelocity.ShootFromPosition(strengthSlider.Slider.value, aimPosition.getBallYStrength(), camera.transform.position);
+            ballVelocity.StartBallEffect(aimPosition.getBallXEffectStrength(), strengthSlider.Slider.value, camera.transform);
             ballVelocity.StartCheckVelocity();
 
             canShoot = false;

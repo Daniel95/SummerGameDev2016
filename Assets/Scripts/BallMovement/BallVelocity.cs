@@ -7,6 +7,15 @@ public class BallVelocity : MonoBehaviour {
     [SerializeField]
     private float minVelocityValue = 0.1f;
 
+    [SerializeField]
+    private float effectStrengthMultiplier = 0.3f;
+
+    [SerializeField]
+    private float effectMultiplierStart = 5f;
+
+    [SerializeField]
+    private float effectMultiplierOverTime = 1.5f;
+
     public Action layStill;
 
     private Rigidbody rb;
@@ -19,11 +28,39 @@ public class BallVelocity : MonoBehaviour {
     /// add velocity to the target object.
     /// </summary>
     /// <param name="_velocity"></param>
-    public void ShootFromPosition(float _distance, float _height, Vector3 _shootPosition)
+    public void ShootFromPosition(float _strength, float _height, Vector3 _shootPosition)
     {
-        Vector3 vectorToShooter = transform.position - _shootPosition;
+        Vector3 angle = getAngle(_shootPosition);
 
-        Vector3 AbsoluteVectorToShooter = new Vector3(Mathf.Abs(_shootPosition.x - transform.position.x), Mathf.Abs(_shootPosition.y - transform.position.y), Math.Abs(_shootPosition.z - transform.position.z));
+        rb.velocity += new Vector3(_strength * angle.x, _height, _strength * angle.z);
+    }
+
+    /// <summary>
+    /// Starts the coroutine that gives the ball an effect.
+    /// </summary>
+    public void StartBallEffect(float _xEffectValue, float _shootStrength, Transform _shooter)
+    {
+        StartCoroutine(BallEffect(_xEffectValue, _shootStrength, _shooter));
+    }
+
+    //gives the ball an effect
+    IEnumerator BallEffect(float _xEffectValue, float _shootStrength, Transform _shooter)
+    {
+        Vector3 effectVector = getAngle(_shooter.position - _shooter.right * _xEffectValue) * (_shootStrength * effectMultiplierStart);
+
+        while (CheckMinumumVectorSize(effectVector))
+        {
+            rb.velocity += effectVector;
+            effectVector *= effectMultiplierOverTime;
+
+            yield return new WaitForFixedUpdate();
+        }
+    }
+
+    private Vector3 getAngle(Vector3 _othersPosition) {
+        Vector3 vectorToShooter = transform.position - _othersPosition;
+
+        Vector3 AbsoluteVectorToShooter = new Vector3(Mathf.Abs(_othersPosition.x - transform.position.x), Mathf.Abs(_othersPosition.y - transform.position.y), Math.Abs(_othersPosition.z - transform.position.z));
 
         float totalVector = AbsoluteVectorToShooter.x + AbsoluteVectorToShooter.z;
 
@@ -35,7 +72,7 @@ public class BallVelocity : MonoBehaviour {
         if (vectorToShooter.z < 0)
             zDir *= -1;
 
-        rb.velocity += new Vector3(_distance * xDir, _height, _distance *  zDir);
+        return new Vector3(xDir, 0, zDir);
     }
 
     /// <summary>
@@ -47,7 +84,7 @@ public class BallVelocity : MonoBehaviour {
 
     //checks if there is velocity or not
     IEnumerator CheckVelocity() {
-        while (Vector3.Distance(rb.velocity, Vector3.zero) > minVelocityValue) {
+        while (CheckMinumumVectorSize(rb.velocity)) {
             yield return new WaitForFixedUpdate();
         }
 
@@ -57,5 +94,17 @@ public class BallVelocity : MonoBehaviour {
         if (layStill != null) {
             layStill();
         }
+    }
+
+    private bool CheckMinumumVectorSize(Vector3 _vector)
+    {
+        if (Vector3.Distance(_vector, Vector3.zero) > minVelocityValue)
+            return true;
+        else
+            return false;
+    }
+
+    public void multiplyVelocity(float _multiplier) {
+        rb.velocity *= _multiplier;
     }
 }
