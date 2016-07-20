@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class BallVelocity : MonoBehaviour {
+public class BallVelocity : MonoBehaviour, IVelocity {
 
     [SerializeField]
     private float minVelocityValue = 0.5f;
@@ -32,7 +32,7 @@ public class BallVelocity : MonoBehaviour {
     {
         Vector3 angle = getAngle(_shootPosition);
 
-        rb.velocity += new Vector3(_strength * angle.x, _height, _strength * angle.z);
+        rb.velocity += new Vector3(_strength * angle.x, _height, _height * angle.z);
     }
 
     /// <summary>
@@ -104,7 +104,7 @@ public class BallVelocity : MonoBehaviour {
             return false;
     }
 
-    public void multiplyVelocity(float _multiplier) {
+    public void MultiplyVelocity(float _multiplier) {
         rb.velocity *= _multiplier;
     }
 }
