@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-public class UnitedCoinTrigger : MonoBehaviour, IObstaclesBehaviour {
+public class UnitedCoinTrigger : MonoBehaviour {
 
     private ScoreTracker scoreTracker;
 
     public void Interact()
     {
-        scoreTracker.UnitedCoinCollected();
-        Destroy(this.gameObject);
+      
     }
 
     // Use this for initialization
@@ -19,7 +18,8 @@ public class UnitedCoinTrigger : MonoBehaviour, IObstaclesBehaviour {
     {
         if(collider.CompareTag(Tags.BALL.ToString()))
         {
-            Interact();
+            scoreTracker.UnitedCoinCollected();
+            Destroy(this.gameObject);
         }
     }
 }
