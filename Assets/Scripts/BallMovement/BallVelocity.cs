@@ -89,12 +89,16 @@ public class BallVelocity : MonoBehaviour, IBallVelocity {
             yield return new WaitForFixedUpdate();
         }
 
-        rb.isKinematic = true;
-        rb.isKinematic = false;
+        ResetVelocity();
 
         if (layStill != null) {
             layStill();
         }
+    }
+
+    public void ResetVelocity() {
+        rb.isKinematic = true;
+        rb.isKinematic = false;
     }
 
     private bool CheckMinumumVectorSize(Vector3 _vector)
