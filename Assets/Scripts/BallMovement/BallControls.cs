@@ -10,9 +10,6 @@ public class BallControls : MonoBehaviour {
     private AimPosition aimPosition;
 
     [SerializeField]
-    private ScoreTracker scoreTracker;
-
-    [SerializeField]
     private GameObject camera;
     
     private BallVelocity ballVelocity;
