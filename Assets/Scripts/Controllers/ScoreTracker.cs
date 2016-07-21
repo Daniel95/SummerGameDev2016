@@ -9,13 +9,18 @@ public class ScoreTracker : MonoBehaviour, IScoreTracker
     [SerializeField]
     private Image unitedCoinsImage;
 
-    private const string defaulthitsText = "Aantal Schoten: ";
+    [SerializeField]
+    private Font textFont;
+
+    private const string defaulthitsText = "Aantal Trappen: ";
 
     private int shotCount;
     private bool islayingStill;
 
     private void Start()
     {
+        hitsTextField.font = textFont;
+        hitsTextField.text = defaulthitsText + "00";
         shotCount = 0;
         islayingStill = true;
     }
