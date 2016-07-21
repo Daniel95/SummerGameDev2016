@@ -3,24 +3,19 @@ using UnityEngine.EventSystems;
 
 public class UnitedCoinTrigger : MonoBehaviour {
 
-
-    public void Interact()
-    {
-      
-    }
+    private IScoreTracker scoreTracker;
 
     // Use this for initialization
-    void Start () {
+    void Start ()
+    {
+        scoreTracker = GameObject.FindGameObjectWithTag(Tags.GAMECONTROLLER.ToString()).GetComponent<IScoreTracker>();
 	}
 
     private void OnTriggerEnter(Collider collider)
     {
         if(collider.CompareTag(Tags.BALL.ToString()))
         {
-            ExecuteEvents.Execute<IScoreTracker>(collider.gameObject, null, (x, y) =>
-            {
-                x.UnitedCoinCollected();
-            });
+            scoreTracker.UnitedCoinCollected();
             Destroy(this.gameObject);
         }
     }

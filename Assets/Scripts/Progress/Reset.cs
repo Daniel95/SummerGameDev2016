@@ -18,7 +18,7 @@ public class Reset : MonoBehaviour {
         ballVelocity.layStill += SetPosition;
     }
 
-    private void Disable()
+    private void OnDisable()
     {
         ballVelocity.layStill -= SetPosition;
     }
