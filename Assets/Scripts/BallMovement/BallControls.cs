@@ -39,6 +39,7 @@ public class BallControls : MonoBehaviour {
         if (canShoot) {
             ballVelocity.ShootFromPosition(strengthSlider.Slider.value, aimPosition.getBallYStrength(), camera.transform.position);
             ballVelocity.StartBallEffect(aimPosition.getBallXEffectStrength(), strengthSlider.Slider.value, camera.transform);
+            aimPosition.ResetAimPosition();
             ballVelocity.StartCheckVelocity();
 
             canShoot = false;

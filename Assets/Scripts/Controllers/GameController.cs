@@ -1,26 +1,25 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
     [SerializeField]
     private GameObject pauseMenu;
-    //[SerializeField]
-    //private GameObject pauseButton;
-    //[SerializeField]
-    //private GameObject restartButton;
-    //[SerializeField]
-    //private GameObject audioButton;
-    //[SerializeField]
-    //private GameObject pauseMenuRestartButton;
-    //[SerializeField]
-    //private GameObject pauseMenuResumeButton;
-    //[SerializeField]
-    //private GameObject pauseMenuMainMenuButton;
+
+    [SerializeField]
+    private GameObject finishMenu;
+
+    private SceneLoader sceneLoader;
 
     // Use this for initialization
     void Start () {
+        if (GameObject.FindObjectsOfType<GameController>().Length > 1) {
+            Destroy(this.gameObject);
+        }
+
+        DontDestroyOnLoad(this);
+
+        sceneLoader = GetComponent<SceneLoader>();
+
         if (pauseMenu != null)
         {
             pauseMenu.SetActive(false);
@@ -46,17 +45,15 @@ public class GameController : MonoBehaviour {
 
     public void Restart()
     {
-        int scene = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(scene);
         Time.timeScale = 1;
+
+        finishMenu.SetActive(false);
+
+        sceneLoader.LoadCurrentScene();
     }
 
-    public void ChangeScene(string nameScene)
+    public void Finish()
     {
-        //destroy all objects in current screen.
-        DontDestroyOnLoad(this);
-        //show mainmenu
-        SceneManager.LoadScene(nameScene);
-        Time.timeScale = 1;
+        finishMenu.SetActive(true);
     }
 }

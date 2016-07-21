@@ -42,4 +42,9 @@ public class AimPosition : MonoBehaviour {
     {
         return minXEffectStrength + Mathf.Abs(maxXEffectStrength - minXEffectStrength) * scrollRect.horizontalNormalizedPosition;
     }
+
+    public void ResetAimPosition() {
+        scrollRect.horizontalNormalizedPosition = 0.5f;
+        scrollRect.verticalNormalizedPosition = 0.5f;
+    }
 }
