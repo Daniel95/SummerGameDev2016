@@ -7,6 +7,9 @@ public class Finish : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collision) {
         if (collision.CompareTag(Tags.BALL.ToString())) {
+            GetComponent<PlaySound>().Play();
+            GetComponent<ActivateParticle>().Activate();
+
             gameController.Finish();
         }
     }

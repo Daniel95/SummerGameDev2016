@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlaySounds : MonoBehaviour {
+public class PlaySound : MonoBehaviour {
 
     private AudioSource audioSource;
 
@@ -11,7 +11,7 @@ public class PlaySounds : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void Activate()
+    public void Play()
     {
         audioSource.Play();
     }
