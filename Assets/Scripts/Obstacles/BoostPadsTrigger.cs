@@ -3,11 +3,15 @@ using System.Collections;
 using UnityEngine.EventSystems;
 
 public class BoostPadsTrigger : MonoBehaviour {
+
     [SerializeField]
     private float speedboost;
 
+    private PlaySound playSound;
+
     void Start()
     {
+        playSound = GetComponent<PlaySound>();
         speedboost = 0;
     }
 
@@ -15,6 +19,8 @@ public class BoostPadsTrigger : MonoBehaviour {
     {
         if (collider.CompareTag(Tags.BALL.ToString()))
         {
+            playSound.Play();
+
             ExecuteEvents.Execute<IBallVelocity>(collider.gameObject, null, (x, y) =>
             {
                 x.MultiplyVelocity(speedboost);
