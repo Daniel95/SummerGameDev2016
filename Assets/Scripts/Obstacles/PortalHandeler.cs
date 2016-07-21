@@ -32,9 +32,9 @@ public class PortalHandeler : MonoBehaviour
         if (other.CompareTag(Tags.BALL.ToString()) && justSpawned == false)
         {
             if (!oneWay)
-                connectedPortalHandler.spawned = true;
+                connectedPortalHandler.Spawned = true;
 
-            other.transform.position = new Vector3(spawnPoint.transform.position.x, spawnPoint.transform.position.y + 0.8f, spawnPoint.transform.position.z);
+            other.transform.position = new Vector3(connectedPortalHandler.SpawnPoint.transform.position.x, connectedPortalHandler.SpawnPoint.transform.position.y + 0.8f, connectedPortalHandler.SpawnPoint.transform.position.z);
         }
     }
 
@@ -46,9 +46,13 @@ public class PortalHandeler : MonoBehaviour
         }
     }
 
-    public bool spawned
+    public bool Spawned
     {
         get { return justSpawned; }
         set { justSpawned = value; }
+    }
+
+    public Transform SpawnPoint {
+        get { return spawnPoint; }
     }
 }
