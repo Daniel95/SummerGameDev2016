@@ -13,9 +13,6 @@ public class TouchCameraControl : MonoBehaviour
     [SerializeField]
     private GameObject ball;
 
-    [SerializeField]
-    private GameObject parent;
-
     public float turnSpeed = 10.0f;
     public float perspectiveZoomSpeed = 0.5f;
     public float speed = 0.1f;
@@ -47,7 +44,6 @@ public class TouchCameraControl : MonoBehaviour
         // Clamp the field of view to make sure it's between 30 and 90.
         distance = Mathf.Clamp(distance, minDistance, maxDistance);
         Vector3 offset = (transform.position - ball.transform.position).normalized * distance;
-        parent.transform.position = Vector3.Lerp(transform.position, ball.transform.position + offset, Time.deltaTime);
         transform.position = Vector3.Lerp(transform.position, ball.transform.position + offset, Time.deltaTime);
         transform.LookAt(ball.transform);
     }
