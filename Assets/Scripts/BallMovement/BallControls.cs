@@ -14,7 +14,7 @@ public class BallControls : MonoBehaviour {
 
     [SerializeField]
     private GameObject camera;
-
+    
     private BallVelocity ballVelocity;
 
     private bool canShoot = true;
