@@ -13,7 +13,8 @@ public class TouchCameraControl : MonoBehaviour
     [SerializeField]
     private GameObject ball;
 
-    public float turnSpeed = 10.0f;
+    public float turnSpeedHorizontal = 10.0f;
+    public float turnSpeedVertical = 10.0f;
     public float perspectiveZoomSpeed = 0.5f;
     public float speed = 0.1f;
     public float distance = 5.0f;
@@ -21,7 +22,6 @@ public class TouchCameraControl : MonoBehaviour
 
     void Start()
     {
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
     }
 
     void Update()
@@ -69,8 +69,8 @@ public class TouchCameraControl : MonoBehaviour
     {
         // Get movement of the finger since last frame
         Vector2 touchDeltaPosition = Input.GetTouch(0).deltaPosition;
-        transform.RotateAround(ball.transform.position, Vector3.down, ((Time.deltaTime * touchDeltaPosition.x) * turnSpeed));
-        transform.RotateAround(ball.transform.position, Vector3.left, ((Time.deltaTime * touchDeltaPosition.y) * turnSpeed));
+        transform.RotateAround(ball.transform.position, Vector3.down, ((Time.deltaTime * touchDeltaPosition.x) * turnSpeedHorizontal));
+        transform.RotateAround(ball.transform.position, Vector3.left, ((Time.deltaTime * touchDeltaPosition.y) * turnSpeedVertical));
     }
 
     private void Pinch()
