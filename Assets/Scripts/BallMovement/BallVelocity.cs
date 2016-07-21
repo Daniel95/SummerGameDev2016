@@ -29,7 +29,11 @@ public class BallVelocity : MonoBehaviour, IBallVelocity {
     {
         Vector3 angle = getAngle(_shootPosition);
 
-        rb.velocity += new Vector3(_strength * angle.x, _height, _strength * angle.z);
+        if (_height < 1) {
+            _height = 1;
+        }
+
+        rb.velocity += new Vector3((_strength / Mathf.Abs(_height)) * angle.x, (_height / 10) * _strength, (_strength / Mathf.Abs(_height)) * angle.z);
     }
 
     /// <summary>
