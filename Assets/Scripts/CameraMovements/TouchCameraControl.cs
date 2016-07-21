@@ -19,6 +19,11 @@ public class TouchCameraControl : MonoBehaviour
     public float distance = 5.0f;
     private bool isAiming = false;
 
+    void Start()
+    {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+    }
+
     void Update()
     {
         // If there are two touches on the device...
