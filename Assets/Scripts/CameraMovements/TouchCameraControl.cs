@@ -39,12 +39,33 @@ public class TouchCameraControl : MonoBehaviour
             TurnCamera();
         }
 
+        if (!CheckVisability(ball))
+        {
+            distance = minDistance;
+        }
+
         // Clamp the field of view to make sure it's between 30 and 90.
         distance = Mathf.Clamp(distance, minDistance, maxDistance);
         Vector3 offset = (transform.position - ball.transform.position).normalized * distance;
         parent.transform.position = Vector3.Lerp(transform.position, ball.transform.position + offset, Time.deltaTime);
         transform.position = Vector3.Lerp(transform.position, ball.transform.position + offset, Time.deltaTime);
         transform.LookAt(ball.transform);
+    }
+
+    private bool CheckVisability(GameObject Object)
+    {
+        RaycastHit hit;
+        // Calculate Ray direction
+        Vector3 direction =  ball.transform.position - transform.position ;
+        Debug.DrawRay(transform.position, direction, Color.cyan);
+        if (Physics.Raycast(transform.position, direction, out hit))
+        {
+            if (hit.transform.CompareTag(Tags.BALL.ToString()))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void TurnCamera()
