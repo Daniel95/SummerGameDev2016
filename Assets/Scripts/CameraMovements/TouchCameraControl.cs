@@ -38,7 +38,7 @@ public class TouchCameraControl : MonoBehaviour
 
         if (!CheckVisability(ball))
         {
-            distance = minDistance;
+            distance -= 0.2f;// minDistance;
         }
 
         // Clamp the field of view to make sure it's between 30 and 90.
@@ -60,6 +60,7 @@ public class TouchCameraControl : MonoBehaviour
             {
                 return true;
             }
+
         }
         return false;
     }

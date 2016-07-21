@@ -12,11 +12,11 @@ public class GameController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        if (GameObject.FindObjectsOfType<GameController>().Length > 1) {
-            Destroy(this.gameObject);
-        }
+        //if (GameObject.FindObjectsOfType<GameController>().Length > 1) {
+        //    Destroy(this.gameObject);
+        //}
         sceneLoader = GetComponent<SceneLoader>();
-        DontDestroyOnLoad(this);
+      //  DontDestroyOnLoad(this);
 
 
         if (pauseMenu != null)

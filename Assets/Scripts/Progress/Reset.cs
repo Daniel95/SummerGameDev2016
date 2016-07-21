@@ -32,7 +32,7 @@ public class Reset : MonoBehaviour {
     {
         if (collision.CompareTag(Tags.RESET.ToString()))
         {
-            ballVelocity.
+            ballVelocity.ResetVelocity();
             transform.position = oldPosition; 
         }
     }
