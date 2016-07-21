@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-public class BallVelocity : MonoBehaviour, IBallVelocity {
+public class BallVelocity : MonoBehaviour, IBallVelocity
+{
 
     [SerializeField]
     private float minVelocityValue = 0.5f;
@@ -17,7 +18,8 @@ public class BallVelocity : MonoBehaviour, IBallVelocity {
 
     private Rigidbody rb;
 
-    void Awake() {
+    void Awake()
+    {
         rb = GetComponent<Rigidbody>();
     }
 
@@ -29,7 +31,8 @@ public class BallVelocity : MonoBehaviour, IBallVelocity {
     {
         Vector3 angle = getAngle(_shootPosition);
 
-        if (_height < 1) {
+        if (_height < 1)
+        {
             _height = 1;
         }
 
@@ -58,7 +61,8 @@ public class BallVelocity : MonoBehaviour, IBallVelocity {
         }
     }
 
-    private Vector3 getAngle(Vector3 _othersPosition) {
+    private Vector3 getAngle(Vector3 _othersPosition)
+    {
         Vector3 vectorToShooter = transform.position - _othersPosition;
 
         Vector3 AbsoluteVectorToShooter = new Vector3(Mathf.Abs(_othersPosition.x - transform.position.x), Mathf.Abs(_othersPosition.y - transform.position.y), Math.Abs(_othersPosition.z - transform.position.z));
@@ -79,24 +83,29 @@ public class BallVelocity : MonoBehaviour, IBallVelocity {
     /// <summary>
     /// starts the coroutine which checks if the ball is moving or not, fires off the layStill delegate when velocity is under the minimum.
     /// </summary>
-    public void StartCheckVelocity() {
+    public void StartCheckVelocity()
+    {
         StartCoroutine(CheckVelocity());
     }
 
     //checks if there is velocity or not
-    IEnumerator CheckVelocity() {
-        while (CheckMinumumVectorSize(rb.velocity)) {
+    IEnumerator CheckVelocity()
+    {
+        while (CheckMinumumVectorSize(rb.velocity))
+        {
             yield return new WaitForFixedUpdate();
         }
 
         ResetVelocity();
 
-        if (layStill != null) {
+        if (layStill != null)
+        {
             layStill();
         }
     }
 
-    public void ResetVelocity() {
+    public void ResetVelocity()
+    {
         rb.isKinematic = true;
         rb.isKinematic = false;
     }
@@ -109,7 +118,18 @@ public class BallVelocity : MonoBehaviour, IBallVelocity {
             return false;
     }
 
-    public void MultiplyVelocity(float _multiplier) {
+    public void MultiplyVelocity(float _multiplier)
+    {
         rb.velocity *= _multiplier;
+    }
+
+    public void MultiplyGivenAxes(Vector3 _multipliers)
+    {
+        rb.velocity = new Vector3(rb.velocity.x * _multipliers.x, rb.velocity.y * _multipliers.y, rb.velocity.z * _multipliers.z);
+    }
+
+    public void AddVelocity(Vector3 _velocity)
+    {
+        rb.velocity += _velocity;
     }
 }
