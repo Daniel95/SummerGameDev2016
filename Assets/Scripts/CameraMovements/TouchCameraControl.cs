@@ -21,14 +21,12 @@ public class TouchCameraControl : MonoBehaviour
 
     void Update()
     {
-        if (UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
-            return;
-            // If there are two touches on the device...
-        if (Input.touchCount == 2)
+        // If there are two touches on the device...
+        if (Input.touchCount == 2 && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
             Pinch();
         }
-        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved)
+        if (Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Moved && !UnityEngine.EventSystems.EventSystem.current.IsPointerOverGameObject())
         {
             TurnCamera();
         }
