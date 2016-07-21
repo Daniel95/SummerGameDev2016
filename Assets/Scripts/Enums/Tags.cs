@@ -6,5 +6,5 @@
     POINTS,
     GAMECONTROLLER,
     BALLVELOCITY,
-
+    RESET
 }

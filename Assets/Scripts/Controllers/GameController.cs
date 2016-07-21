@@ -15,16 +15,20 @@ public class GameController : MonoBehaviour {
         if (GameObject.FindObjectsOfType<GameController>().Length > 1) {
             Destroy(this.gameObject);
         }
-
+        sceneLoader = GetComponent<SceneLoader>();
         DontDestroyOnLoad(this);
 
-        sceneLoader = GetComponent<SceneLoader>();
 
         if (pauseMenu != null)
         {
             pauseMenu.SetActive(false);
         }
 	}
+
+    private void OnEnable()
+    {
+        sceneLoader = GetComponent<SceneLoader>();
+    }
 
     public void Pause()
     {
@@ -46,10 +50,10 @@ public class GameController : MonoBehaviour {
     public void Restart()
     {
         Time.timeScale = 1;
-
+        pauseMenu.SetActive(false);
         finishMenu.SetActive(false);
-
         sceneLoader.LoadCurrentScene();
+
     }
 
     public void Finish()
