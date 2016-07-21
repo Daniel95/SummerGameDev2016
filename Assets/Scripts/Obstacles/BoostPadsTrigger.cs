@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
-public class BoostPads : MonoBehaviour {
+public class BoostPadsTrigger : MonoBehaviour {
     [SerializeField]
     private float speedboost;
 
