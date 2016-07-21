@@ -1,18 +1,30 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PlaySound : MonoBehaviour {
 
     private AudioSource audioSource;
 
+    private AudioSetting audioSetting;
+
+    private bool audioSettingExists = false;
+
     // Use this for initialization
-    void Start()
+    void Awake()
     {
+        if (GameObject.FindGameObjectWithTag(Tags.AUDIOSETTING.ToString()) != null)
+        {
+            audioSettingExists = true;
+            audioSetting = GameObject.FindGameObjectWithTag(Tags.AUDIOSETTING.ToString()).GetComponent<AudioSetting>();
+        }
+       
         audioSource = GetComponent<AudioSource>();
     }
 
     public void Play()
     {
-        audioSource.Play();
+        if(!audioSettingExists || audioSetting.AudioActive)
+        {
+            audioSource.Play();
+        }
     }
 }

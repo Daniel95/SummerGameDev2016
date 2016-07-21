@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Reset : MonoBehaviour {
 
+    private PlaySound playSound;
+
     private Vector3 oldPosition;
 
     private BallVelocity ballVelocity;
@@ -10,6 +12,7 @@ public class Reset : MonoBehaviour {
     private void Start()
     {
         oldPosition = transform.position;
+        playSound = GetComponent<PlaySound>();
     }
 
     private void OnEnable()
@@ -32,6 +35,7 @@ public class Reset : MonoBehaviour {
     {
         if (collision.CompareTag(Tags.RESET.ToString()))
         {
+            playSound.Play();
             ballVelocity.ResetVelocity();
             transform.position = oldPosition; 
         }

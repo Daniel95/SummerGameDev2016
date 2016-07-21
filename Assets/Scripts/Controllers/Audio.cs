@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
 public class Audio : MonoBehaviour {
+
+    [SerializeField]
+    private AudioSetting audioSetting;
 
     [SerializeField]
     private Image audioImage;
@@ -13,26 +15,22 @@ public class Audio : MonoBehaviour {
     [SerializeField]
     private Sprite audioOff;
 
-    private bool isAudioOn;
-
     private void Start()
     {
-        isAudioOn = true;
+        audioSetting.AudioActive = true;
     }
 
     public void SetAudioImage()
     {
-        if (isAudioOn)
+        if (audioSetting.AudioActive)
         {
             audioImage.sprite = audioOff;
-            isAudioOn = false;
+            audioSetting.AudioActive = false;
         }
         else
         {
             audioImage.sprite = audioOn;
-            isAudioOn = true;
+            audioSetting.AudioActive = true;
         }
     }
-
-
 }

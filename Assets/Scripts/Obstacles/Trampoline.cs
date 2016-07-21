@@ -4,10 +4,10 @@ public class Trampoline : MonoBehaviour
 {
 
     [SerializeField]
-    private float yStrength;
+    private float yStrength = 10;
 
     [SerializeField]
-    private float yMultiplier;
+    private float yMultiplier = -1;
 
     private PlaySound playSound;
 

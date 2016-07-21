@@ -10,16 +10,16 @@ public class BallControls : MonoBehaviour {
     private AimPosition aimPosition;
 
     [SerializeField]
-    private ScoreTracker scoreTracker;
-
-    [SerializeField]
     private GameObject camera;
-
+    
     private BallVelocity ballVelocity;
+
+    private PlaySound playSound;
 
     private bool canShoot = true;
 
     private void Awake() {
+        playSound = GetComponent<PlaySound>();
         ballVelocity = GetComponent<BallVelocity>();
     }
 
@@ -40,6 +40,8 @@ public class BallControls : MonoBehaviour {
     /// </summary>
     public void Shoot() {
         if (canShoot) {
+            playSound.Play();
+
             ballVelocity.ShootFromPosition(strengthSlider.Slider.value, aimPosition.getBallYStrength(), camera.transform.position);
             ballVelocity.StartBallEffect(aimPosition.getBallXEffectStrength(), strengthSlider.Slider.value, camera.transform);
             aimPosition.ResetAimPosition();
