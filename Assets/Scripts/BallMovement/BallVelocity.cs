@@ -112,4 +112,13 @@ public class BallVelocity : MonoBehaviour, IBallVelocity {
     public void MultiplyVelocity(float _multiplier) {
         rb.velocity *= _multiplier;
     }
+
+    public void MultiplyGivenAxes(Vector3 _multipliers) {
+        rb.velocity = new Vector3(rb.velocity.x * _multipliers.x, rb.velocity.y * _multipliers.y, rb.velocity.z * _multipliers.z);
+    }
+
+    public void AddVelocity(Vector3 _velocity)
+    {
+        rb.velocity += _velocity;
+    }
 }

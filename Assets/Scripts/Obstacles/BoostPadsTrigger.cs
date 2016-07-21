@@ -17,7 +17,7 @@ public class BoostPads : MonoBehaviour {
         {
             ExecuteEvents.Execute<IBallVelocity>(collider.gameObject, null, (x, y) =>
             {
-                x.MultiplyVelocity(speedboost);
+                x.MultiplyGivenAxes(new Vector3(speedboost,1,speedboost));
             }
             );
         }
