@@ -24,6 +24,7 @@ public class ScoreTracker : MonoBehaviour, IScoreTracker
         shotCount = 0;
         islayingStill = true;
     }
+
     private void OnEnable()
     {
         ballVelocity = GameObject.FindGameObjectWithTag(Tags.BALL.ToString()).GetComponent<BallVelocity>();

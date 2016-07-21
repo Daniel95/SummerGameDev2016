@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
 
@@ -8,16 +9,12 @@ public class GameController : MonoBehaviour {
     [SerializeField]
     private GameObject finishMenu;
 
+   
     private SceneLoader sceneLoader;
 
     // Use this for initialization
     void Start () {
-        //if (GameObject.FindObjectsOfType<GameController>().Length > 1) {
-        //    Destroy(this.gameObject);
-        //}
         sceneLoader = GetComponent<SceneLoader>();
-      //  DontDestroyOnLoad(this);
-
 
         if (pauseMenu != null)
         {
@@ -60,4 +57,5 @@ public class GameController : MonoBehaviour {
     {
         finishMenu.SetActive(true);
     }
+
 }
