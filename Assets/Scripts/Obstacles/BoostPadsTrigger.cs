@@ -5,14 +5,13 @@ using UnityEngine.EventSystems;
 public class BoostPadsTrigger : MonoBehaviour {
 
     [SerializeField]
-    private float speedboost;
+    private float speedMultiplier;
 
     private PlaySound playSound;
 
     void Start()
     {
         playSound = GetComponent<PlaySound>();
-        speedboost = 0;
     }
 
     private void OnTriggerEnter(Collider collider)
@@ -23,7 +22,7 @@ public class BoostPadsTrigger : MonoBehaviour {
 
             ExecuteEvents.Execute<IBallVelocity>(collider.gameObject, null, (x, y) =>
             {
-                x.MultiplyVelocity(speedboost);
+                x.MultiplyGivenAxes(new Vector3(speedMultiplier, 1, speedMultiplier));
             });
         }
     }
