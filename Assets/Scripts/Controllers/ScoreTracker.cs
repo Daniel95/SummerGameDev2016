@@ -21,6 +21,7 @@ public class ScoreTracker : MonoBehaviour, IScoreTracker
     {
         hitsTextField.font = textFont;
         hitsTextField.text = defaulthitsText + "00";
+        unitedCoinsImage.color = new Color(1, 1, 1, 0.2f);
         shotCount = 0;
         islayingStill = true;
     }

@@ -6,6 +6,7 @@ public class AudioSetting : MonoBehaviour {
 
     void Start()
     {
+        AudioActive = true;
         DontDestroyOnLoad(this.gameObject);
     }
 
