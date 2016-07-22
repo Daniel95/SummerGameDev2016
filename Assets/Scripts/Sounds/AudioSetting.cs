@@ -6,6 +6,9 @@ public class AudioSetting : MonoBehaviour {
 
     void Start()
     {
+        if (GameObject.FindGameObjectsWithTag(Tags.AUDIOSETTING.ToString()).Length > 1)
+            Destroy(this.gameObject);
+
         AudioActive = true;
         DontDestroyOnLoad(this.gameObject);
     }
