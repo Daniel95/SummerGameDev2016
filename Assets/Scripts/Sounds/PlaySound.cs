@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 public class PlaySound : MonoBehaviour {
 
@@ -31,5 +32,10 @@ public class PlaySound : MonoBehaviour {
                 audioSource.clip = audioClip;
             audioSource.Play();
         }
+    }
+
+    public void Stop()
+    {
+        audioSource.Stop();
     }
 }

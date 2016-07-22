@@ -41,12 +41,12 @@ public class Audio : MonoBehaviour {
         if (audioSetting.AudioActive)
         {
             audioImage.sprite = audioOff;
-            audioSetting.AudioActive = false;
+            audioSetting.SetAudioActive(false);
         }
         else
         {
             audioImage.sprite = audioOn;
-            audioSetting.AudioActive = true;
+            audioSetting.SetAudioActive(true);
         }
     }
 }

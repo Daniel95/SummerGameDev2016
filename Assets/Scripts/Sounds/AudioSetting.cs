@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
+using System;
 
 public class AudioSetting : MonoBehaviour {
+
+    public Action<bool> changeAudioSetting;
 
     private bool audioActive;
 
@@ -9,12 +12,24 @@ public class AudioSetting : MonoBehaviour {
         if (GameObject.FindGameObjectsWithTag(Tags.AUDIOSETTING.ToString()).Length > 1)
             Destroy(this.gameObject);
 
-        AudioActive = true;
+        audioActive = true;
         DontDestroyOnLoad(this.gameObject);
     }
 
     public bool AudioActive {
         get { return audioActive; }
-        set { audioActive = value; }
+    }
+
+    public void SwitchAudioActive() {
+        audioActive = !audioActive;
+        if (changeAudioSetting != null)
+            changeAudioSetting(audioActive);
+    }
+
+    public void SetAudioActive(bool _active)
+    {
+        audioActive = _active;
+        if (changeAudioSetting != null)
+            changeAudioSetting(audioActive);
     }
 }
