@@ -5,9 +5,9 @@ using UnityEngine.UI;
 public class TouchCameraControl : MonoBehaviour
 {
     [SerializeField]
-    private float minDistance = 3.0f;
+    private float minDistance;
     [SerializeField]
-    private float maxDistance = 10.0f;
+    private float maxDistance;
     [SerializeField]
     private Camera _camera;
     [SerializeField]
