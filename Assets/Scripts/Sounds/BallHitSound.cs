@@ -6,9 +6,10 @@ public class BallHitSound : MonoBehaviour {
     [SerializeField]
     private int maxSoundCooldown = 10;
 
-    private float soundCooldown;
-
+    [SerializeField]
     private PlaySound playSound;
+
+    private float soundCooldown;
 
     void Start() {
         playSound = GetComponent<PlaySound>();

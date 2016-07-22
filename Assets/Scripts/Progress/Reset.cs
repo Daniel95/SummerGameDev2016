@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Reset : MonoBehaviour {
 
+    [SerializeField]
     private PlaySound playSound;
 
     private Vector3 oldPosition;
