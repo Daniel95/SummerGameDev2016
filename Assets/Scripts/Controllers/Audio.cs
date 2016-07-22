@@ -17,7 +17,23 @@ public class Audio : MonoBehaviour {
 
     private void Start()
     {
-        audioSetting.AudioActive = true;
+        if (GameObject.FindGameObjectWithTag(Tags.AUDIOSETTING.ToString()) != null)
+        {
+            audioSetting = GameObject.FindGameObjectWithTag(Tags.AUDIOSETTING.ToString()).GetComponent<AudioSetting>();
+            SetStartAudioImage();
+        }
+    }
+
+    private void SetStartAudioImage()
+    {
+        if(audioSetting.AudioActive)
+        {
+            audioImage.sprite = audioOn;
+        }
+        else
+        {
+            audioImage.sprite = audioOff;
+        }
     }
 
     public void SetAudioImage()
