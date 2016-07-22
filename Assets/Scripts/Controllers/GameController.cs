@@ -8,14 +8,21 @@ public class GameController : MonoBehaviour {
 
     [SerializeField]
     private GameObject finishMenu;
+    [SerializeField]
+    private Text finishShootText;
+    [SerializeField]
+    private Text finishCoinsText;
 
-   
+    private ScoreTracker scoreTracker;
     private SceneLoader sceneLoader;
+    private const string defaultFinishCoinsText = "Munten: ";
+    private const string defaultFinishShootText = "Schoten: ";
 
     // Use this for initialization
     void Start () {
 
         sceneLoader = GetComponent<SceneLoader>();
+        scoreTracker = GetComponent<ScoreTracker>();
 
         if (pauseMenu != null)
         {
@@ -56,6 +63,11 @@ public class GameController : MonoBehaviour {
 
     public void Finish()
     {
+        finishShootText.text = defaultFinishShootText + scoreTracker.shotCount.ToString();
+        if (scoreTracker.coinCollected)
+            finishCoinsText.text = defaultFinishCoinsText + "Munten Verzameld!";
+        else
+            finishCoinsText.text = defaultFinishCoinsText + "Geen Munt Verzameld";
         finishMenu.SetActive(true);
     }
 

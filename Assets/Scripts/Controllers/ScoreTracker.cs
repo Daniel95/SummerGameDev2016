@@ -12,9 +12,10 @@ public class ScoreTracker : MonoBehaviour, IScoreTracker
     [SerializeField]
     private Font textFont;
 
-    private const string defaulthitsText = "Aantal Trappen: ";
+    private const string defaulthitsText = "Aantal Schoten: ";
 
-    private int shotCount;
+    public bool coinCollected;
+    public int shotCount;
     private bool islayingStill;
 
     private void Start()
