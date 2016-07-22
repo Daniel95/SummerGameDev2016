@@ -38,7 +38,6 @@ public class ShootTracker : MonoBehaviour {
     {
         ShootButton.interactable = false;
         AimPosition.enabled = false;
-
     }
 
 }
