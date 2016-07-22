@@ -2,6 +2,9 @@
 
 public class PlaySound : MonoBehaviour {
 
+    [SerializeField]
+    private AudioClip audioClip;
+
     private AudioSource audioSource;
 
     private AudioSetting audioSetting;
@@ -24,6 +27,8 @@ public class PlaySound : MonoBehaviour {
     {
         if(!audioSettingExists || audioSetting.AudioActive)
         {
+            if (audioClip != null)
+                audioSource.clip = audioClip;
             audioSource.Play();
         }
     }
